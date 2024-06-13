@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+
 import { loadWeb3 } from './utils/EthereumObject';
+import  "./index.css"
+
 import CreateCampaign from './components/CreateCampaign';
 import CampaignList from './components/CampaignList';
 import CampaignDetails from './components/CampaignDetails';
 import { Container, Typography } from '@mui/material';
+
 
 const App = () => {
   const [selectedCampaign, setSelectedCampaign] = useState(null);
@@ -19,12 +23,12 @@ const App = () => {
   }, []);
 
   if (!web3Initialized) {
-    return <div>Loading Web3...</div>;
+    return <div className='m-4 text-[blue]'>Waiting for Wallet Confirmation...</div>;
   }
 
   return (
-    <Container>
-      <Typography variant="h3" gutterBottom>Crowdfunding DApp</Typography>
+    <Container className="mt-4]">
+      <Typography variant="h3" color="indigo" gutterBottom>Crowdfunding Dapp</Typography>
       <CreateCampaign />
       <CampaignList onCampaignSelect={setSelectedCampaign} />
       {selectedCampaign !== null && <CampaignDetails campaignId={selectedCampaign} />}

@@ -15,7 +15,7 @@ const CampaignList = ({campaigns}) => {
                                 Target: {ethers.utils.formatEther(campaign.target.toString())} ETH
                             </Typography>
                             <Typography variant="body2">
-                                Collect: {ethers.utils.formatEther(campaign.amountCollected.toString())} ETH
+                                Colleuct: {ethers.utils.formatEther(campaign.amountCollected.toString())} ETH
                             </Typography>
                             <Typography variant="body2">
                                 Deadline: {new Date(campaign.deadline * 1000).toLocaleString()}

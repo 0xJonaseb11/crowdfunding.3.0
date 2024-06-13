@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { loadWeb3 } from './utils/web3';
+import { loadWeb3 } from './utils/EthereumObject';
 import CreateCampaign from './components/CreateCampaign';
 import CampaignList from './components/CampaignList';
 import CampaignDetails from './components/CampaignDetails';

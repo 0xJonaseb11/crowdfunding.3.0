@@ -1,40 +1,56 @@
-import React, {useState, useEffect} from "react";
-import {getContract, getProvider} from "../utils/EthereumObject";
-import Donate from "./Donate";
-import {Box, Typography, Paper} from "@mui/material";
-import { ethers } from "ethers";
+import React, { useEffect, useState } from 'react';
+import { getContract } from '../utils/EthereumObject';
+import { List, ListItem, ListItemText, Typography, Box } from '@mui/material';
+import { ethers } from 'ethers';
 
-const CampaignDetails = ({campaignId}) => {
-    const [campaign, setCampaign] = useState(null);
+const CampaignList = ({ onCampaignSelect }) => {
+  const [campaigns, setCampaigns] = useState([]);
+  const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const loadCampaign = async() => {
-            const contract = getContract();
-            const campaign = await contract.campaigns(campaignId);
+  useEffect(() => {
+    const loadCampaigns = async () => {
+      try {
+        const contract = getContract();
+        const campaigns = await contract.getAllCampaigns();
+        setCampaigns(campaigns);
+      } catch (err) {
+        console.error("Error loading campaigns:", err);
+        setError(err.message);
+      }
+    };
 
-            setCampaign(campaign);
-        };
+    loadCampaigns();
+  }, []);
 
-        loadCampaign();
-    }, [campaignId]);
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
-    return (
-        <Paper sx={{padding: 3}}>
-      <Typography variant="h4" gutterBottom>
-        {campaign.title}
-        </Typography>
-      <Typography variant="body1" gutterBottom>
-        {campaign.description}
-        </Typography>
-      <Typography variant="body2">
-        Target: {ethers.utils.formatEther(campaign.target)} ETH
-        </Typography>
-      <Typography variant="body2">
-        Collected: {ethers.utils.formatEther(campaign.amountCollected)} ETH
-        </Typography>
-        <Donate campaignId={campaignId}/>
-        </Paper>
-    );
-}
+  return (
+    <Box sx={{ padding: 3 }}>
+      <Typography variant="h4" gutterBottom>Campaigns</Typography>
+      <List>
+        {campaigns.map((campaign, index) => (
+          <ListItem button key={index} onClick={() => onCampaignSelect(index)}>
+            <ListItemText 
+              primary={campaign.title} 
+              secondary={
+                <>
+                  <Typography component="span" variant="body2" color="textPrimary">
+                    {campaign.description}
+                  </Typography>
+                  <br />
+                  Target: {ethers.utils.formatEther(campaign.target)} ETH
+                  <br />
+                  Collected: {ethers.utils.formatEther(campaign.amountCollected)} ETH
+                </>
+              }
+            />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
+};
 
-export default CampaignDetails
+export default CampaignList;

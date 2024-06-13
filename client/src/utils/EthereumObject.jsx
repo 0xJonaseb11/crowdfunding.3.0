@@ -10,10 +10,10 @@ let contract;
 let contractAddress = "0xa9d56A50Ee158B8fEe0f4780dD1a15fb95217870";
 
 const loadWeb3 = async() => {
-    const detectProvider = await detectEthereumProvider();
+    const detectedProvider = await detectEthereumProvider();
 
-    if (detectProvider) {
-        provider= new ethers.poviders.Web3Provider(detectProvider);
+    if (detectedProvider) {
+        provider= new ethers.poviders.Web3Provider(detectedProvider);
 
         await detectedProvider.request({method: "eth_requestAccounts"});
         signer = provider.getSigner();

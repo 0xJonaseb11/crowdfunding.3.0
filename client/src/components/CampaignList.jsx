@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getContract, getProvider } from '../utils/EthereumObject';
 import { List, ListItem, ListItemText, Typography, Box } from '@mui/material';
 import { ethers } from 'ethers';
+import Crowdfunding from "../contract/Crowdfunding.json"
 
 const CampaignList = ({ onCampaignSelect }) => {
   const [campaigns, setCampaigns] = useState([]);

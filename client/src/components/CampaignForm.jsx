@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {TextField, Button, Typography} from "mui/material";
+import {TextField, Button, Typography} from "@mui/material";
 import { ethers } from "ethers";
 
 const CampaignForm = ({contract, provider}) => {

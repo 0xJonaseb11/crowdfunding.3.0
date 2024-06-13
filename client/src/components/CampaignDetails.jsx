@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import {getContract, getWeb3} from "../utils/EthereumObject";
+import {getContract, getProvider} from "../utils/EthereumObject";
 import Donate from "./Donate";
 import {Box, Typography, Paper} from "@mui/material";
 import { ethers } from "ethers";

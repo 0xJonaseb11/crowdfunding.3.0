@@ -1,55 +1,25 @@
-import React, {useState, useEffect} from "react";
-import { ethers } from "ethers";
-import {loadWeb3} from "./utils/EthereumObject"
-import {Container, AppBar, Typography, Button, Grid} from "@mui/material";
-import CampaignForm from "./components/CampaignForm";
-import CampaignList from "./components/CampaignList";
-import { contractAddress, contractABI} from "./contract/Crowdfunding.json";
+import React, { useState, useEffect } from 'react';
+import { loadWeb3 } from './utils/EthereumObject';
+import CreateCampaign from './components/CreateCampaign';
+import CampaignList from './components/CampaignList';
+import CampaignDetails from './components/CampaignDetails';
+import { Container, Typography } from '@mui/material';
 
 const App = () => {
-  const [campaigns, setCampaigns] = useState([]);
-  const [provider, setProvider] = useState(null);
-  const [signer, setSigner] = useState(null);
-  const [contract, setContract] = useState(null);
+  const [selectedCampaign, setSelectedCampaign] = useState(null);
 
   useEffect(() => {
-    const loadProvider = async() => {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const signer = provider.getSigner();
-      const contract = new ethers.contract(contractAddress, contractABI, signer);
-
-      setProvider(provider);
-      setSigner(signer);
-      setContract(contract);
-      setCampaigns(contract);
-    };
-
-    const loadCampaigns = async(contract) => {
-      const campaigns = await contract.getAllCampaigns();
-      setCampaigns(campaigns);
-    };
-
-    if (window.ethereum) {
-      loadProvider(provider);
-    }
+    loadWeb3();
   }, []);
 
   return (
     <Container>
-      <AppBar position="static">
-        <Typography variant="h6" align="center">
-          Crowdfunding dapp
-        </Typography>
-      </AppBar>
-
-      <Grid container spacing={3} style={{marginTop: 20}}>
-        <CampaignForm contract={contract} provider={provider}></CampaignForm>
-      </Grid>
-      <Grid item xs={12} md={8}>
-        <CampaignList campaigns={campaigns}/>
-      </Grid>
+      <Typography variant="h3" gutterBottom>Crowdfunding DApp</Typography>
+      <CreateCampaign />
+      <CampaignList onCampaignSelect={setSelectedCampaign} />
+      {selectedCampaign !== null && <CampaignDetails campaignId={selectedCampaign} />}
     </Container>
-  )
+  );
 };
 
-export default App
+export default App;

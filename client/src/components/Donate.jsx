@@ -10,7 +10,7 @@ const Donate = ({campaignId}) => {
         const contract = getContract();
         const signer = getSigner();
         const tx = await contract.donateToCampaign(campaignId, {
-            value: ethers.utils.parseEther(amount);
+            value: ethers.utils.parseEther(amount)
         });
         await tx.await();
     };

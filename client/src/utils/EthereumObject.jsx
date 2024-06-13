@@ -3,7 +3,6 @@ import React from "react";
 import { ethers } from "ethers";
 import detectEthereumProvider from "@metamask/detect-provider";
 import Crowdfunding from "../contract/Crowdfunding.json";
-import { error } from "console";
 
 let provider;
 let signer;
@@ -19,9 +18,9 @@ const loadWeb3 = async() => {
         await detectedProvider.request({method: "eth_requestAccounts"});
         signer = provider.getSigner();
 
-        contract = new ethers.Contract.(contractAddress, Crowdfunding.abi, signer);
+        contract = new ethers.Contract(contractAddress, Crowdfunding.abi, signer);
     } else {
-        console.error("Please install metamask!!", error);
+        console.error("Please install metamask!!");
     }
 };
 

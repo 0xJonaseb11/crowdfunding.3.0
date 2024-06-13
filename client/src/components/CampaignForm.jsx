@@ -5,7 +5,7 @@ import { ethers } from "ethers";
 const CampaignForm = ({contract, provider}) => {
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    cost [target, setTarget] = useState("");
+    const [target, setTarget] = useState("");
     const [image, setImage] = useState("");
 
     const createCampaign = async() => {

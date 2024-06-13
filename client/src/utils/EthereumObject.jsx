@@ -8,7 +8,7 @@ import { error } from "console";
 let provider;
 let signer;
 let contract;
-let contractAddress = "";
+let contractAddress = "0xa9d56A50Ee158B8fEe0f4780dD1a15fb95217870";
 
 const loadWeb3 = async() => {
     const detectProvider = await detectEthereumProvider();
@@ -19,7 +19,7 @@ const loadWeb3 = async() => {
         await detectedProvider.request({method: "eth_requestAccounts"});
         signer = provider.getSigner();
 
-        contract = new ethers.contract.(contractAddress, Crowdfunding, signer);
+        contract = new ethers.Contract.(contractAddress, Crowdfunding.abi, signer);
     } else {
         console.error("Please install metamask!!", error);
     }

@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import { ethers } from "ethers";
+import {loadWeb3} from "./utils/EthereumObject"
 import {Container, AppBar, Typography, Button, Grid} from "@mui/material";
 import CampaignForm from "./components/CampaignForm";
 import CampaignList from "./components/CampaignList";

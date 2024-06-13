@@ -9,13 +9,25 @@ const CampaignList = ({campaigns}) => {
                 <Grid item xs={12} sm={6} md={4} key={index}>
                     <Card>
                         <CardContent>
-                            <Typography varian></Typography>
+                            <Typography variant="h6">{campaign.title}</Typography>
+                            <Typography variant="body2" color="secondary">{campaign.description}</Typography>
+                            <Typography variant="body2">
+                                Target: {ethers.utils.formatEther(campaign.target.toString())} ETH
+                            </Typography>
+                            <Typography variant="body2">
+                                Collect: {ethers.utils.formatEther(campaign.amountCollected.toString())} ETH
+                            </Typography>
+                            <Typography variant="body2">
+                                Deadline: {new Date(campaign.deadline * 1000).toLocaleString()}
+                            </Typography>
+
+                            <Button variant="contained" color="primary">Donate</Button>
                         </CardContent>
                     </Card>
-                    </Grid>
+                </Grid>
             ))}
-
         </Grid>
-
     );
 }
+
+export default CampaignList

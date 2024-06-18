@@ -4,6 +4,8 @@
 
 Crowdfunding dapp built on ethereum blockchain
 
+Create a project campaign and give it a chance to get funded
+
 ### Getting started
 
 ------------------
